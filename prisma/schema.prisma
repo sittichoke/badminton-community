@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String             @id @default(cuid())
+  name         String?
+  email        String?            @unique
+  image        String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  groups       GroupMember[]
+  follows      GroupFollow[]
+  createdGroups Group[]
+  createdEvents Event[]
+  participants EventParticipant[]
+}
+
+model Group {
+  id            String         @id @default(cuid())
+  name          String
+  description   String
+  coverImageUrl String?
+  createdById   String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  createdBy     User           @relation(fields: [createdById], references: [id])
+  members       GroupMember[]
+  events        Event[]
+  followers     GroupFollow[]
+}
+
+model GroupMember {
+  id        String    @id @default(cuid())
+  userId    String
+  groupId   String
+  role      String    @default("MEMBER")
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id])
+  group     Group     @relation(fields: [groupId], references: [id])
+
+  @@unique([userId, groupId])
+}
+
+model GroupFollow {
+  id        String   @id @default(cuid())
+  userId    String
+  groupId   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  group     Group    @relation(fields: [groupId], references: [id])
+
+  @@unique([userId, groupId])
+}
+
+model Event {
+  id              String             @id @default(cuid())
+  groupId         String
+  createdById     String
+  title           String
+  locationText    String
+  mapUrl          String?
+  startAt         DateTime
+  endAt           DateTime
+  courtCost       Int
+  shuttleCost     Int
+  otherCost       Int?
+  pricePerPerson  Int
+  maxParticipants Int
+  allowOverbook   Boolean            @default(false)
+  skillLevels     String             @default("[]")
+  notes           String?
+  imageUrls       String             @default("[]")
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  group           Group             @relation(fields: [groupId], references: [id])
+  createdBy       User              @relation(fields: [createdById], references: [id])
+  participants    EventParticipant[]
+}
+
+model EventParticipant {
+  id        String            @id @default(cuid())
+  eventId   String
+  userId    String
+  status    String            @default("JOINED")
+  joinedAt  DateTime          @default(now())
+  event     Event             @relation(fields: [eventId], references: [id])
+  user      User              @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
+}
