@@ -4,15 +4,16 @@ import { prisma } from "@/lib/prisma";
 import { Card } from "@/components/ui/card";
 
 type AdminPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function EventAdminPage({ params }: AdminPageProps) {
+  const { id } = await params;
   const user = await getCurrentUser();
   if (!user) redirect("/auth/signin");
 
   const event = await prisma.event.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       group: { include: { members: true } },
       participants: { include: { user: true } },
@@ -24,7 +25,7 @@ export default async function EventAdminPage({ params }: AdminPageProps) {
   const isAdmin = event.group.members.some(
     (m) => m.userId === user.id && m.role === "ADMIN",
   );
-  if (!isAdmin) redirect(`/events/${event.id}`);
+  if (!isAdmin) redirect(`/events/${id}`);
 
   const activeParticipants = event.participants.filter((p) => p.status === "JOINED");
 

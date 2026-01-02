@@ -30,7 +30,7 @@ export default function EmailSignInForm() {
   };
 
   return (
-    <form action={onSubmit} className="space-y-3">
+    <form onSubmit={onSubmit} className="space-y-3">
       <div className="space-y-1">
         <label className="text-sm font-medium text-slate-700" htmlFor="email">
           อีเมล

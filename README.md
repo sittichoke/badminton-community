@@ -51,6 +51,7 @@ docker compose build app
 docker compose run --rm app pnpm db:migrate -- --name init
 docker compose run --rm app pnpm db:seed
 docker compose up
+docker compose restart app
 ```
 - Uses Node 22 base image, mounts the repo for hot reload, and exposes `localhost:3000`.
 - SQLite file lives on the bind mount (`file:./dev.db`) so data persists while containers restart.

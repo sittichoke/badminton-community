@@ -10,12 +10,13 @@ import { format } from "date-fns";
 import { th } from "date-fns/locale";
 
 type EventPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function EventPage({ params }: EventPageProps) {
+  const { id } = await params;
   const user = await getCurrentUser();
-  const event = await getEventWithRelations(params.id);
+  const event = await getEventWithRelations(id);
   if (!event) notFound();
 
   const joinedCount = event.participants.filter((p) => p.status === "JOINED").length;

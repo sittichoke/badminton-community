@@ -31,7 +31,7 @@ export default function SignUpForm() {
   };
 
   return (
-    <form action={onSubmit} className="space-y-4">
+    <form onSubmit={onSubmit} className="space-y-4">
       <div className="space-y-2">
         <label className="text-sm font-medium text-slate-700" htmlFor="name">
           ชื่อที่แสดง

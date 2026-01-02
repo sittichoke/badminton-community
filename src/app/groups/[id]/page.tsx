@@ -7,14 +7,15 @@ import { FollowButton } from "@/features/groups/components/follow-button";
 import { EventCard } from "@/features/events/components/event-card";
 
 type GroupPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function GroupPage({ params }: GroupPageProps) {
+  const { id } = await params;
   const user = await getCurrentUser();
 
   const group = await prisma.group.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       members: true,
       ...(user
@@ -55,7 +56,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
           {user && <FollowButton groupId={group.id} isFollowing={isFollowing} />}
           {isAdmin && (
             <Link
-              href={`/groups/${group.id}/create-event`}
+              href={`/groups/${id}/create-event`}
               className="text-sm font-semibold text-blue-700 underline"
             >
               สร้างกิจกรรม
