@@ -107,8 +107,11 @@ export function CreateEventForm({ groupId }: { groupId: string }) {
     setErrors({});
     startTransition(async () => {
       try {
-        await createEventAction(parsed.data);
+        const event = await createEventAction(parsed.data);
         setMessage("สร้างกิจกรรมเรียบร้อย");
+        if (event?.id) {
+          window.location.href = `/events/${event.id}`;
+        }
       } catch (err) {
         const msg = err instanceof Error ? err.message : "ไม่สำเร็จ";
         setMessage(msg);

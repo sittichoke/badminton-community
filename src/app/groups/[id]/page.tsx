@@ -56,7 +56,7 @@ export default async function GroupPage({ params }: GroupPageProps) {
           {user && <FollowButton groupId={group.id} isFollowing={isFollowing} />}
           {isAdmin && (
             <Link
-              href={`/groups/${id}/create-event`}
+              href={`/groups/${id}/events/new`}
               className="text-sm font-semibold text-blue-700 underline"
             >
               สร้างกิจกรรม

@@ -1,6 +1,7 @@
 # 🏸 Badminton Community MVP — Master Checklist
 
 > Stack:
+> - Use docker and docker compose
 > - Next.js (App Router) + TypeScript
 > - Tailwind CSS
 > - Prisma + SQLite (local)
@@ -21,44 +22,44 @@
 Project รันได้จริง + tooling พร้อม
 
 ### Checklist
-- [ ] Create Next.js App Router project (TypeScript)
-- [ ] Use pnpm
-- [ ] `pnpm dev` runs successfully
+- [x] Create Next.js App Router project (TypeScript)
+- [x] Use pnpm
+- [x] `pnpm dev` runs successfully
 
 #### Tailwind
-- [ ] Install Tailwind CSS
-- [ ] Configure tailwind.config
-- [ ] Add globals.css
-- [ ] Tailwind renders correctly
+- [x] Install Tailwind CSS
+- [x] Configure tailwind.config
+- [x] Add globals.css
+- [x] Tailwind renders correctly
 
 #### Code Quality
-- [ ] Setup ESLint
-- [ ] Setup Prettier
-- [ ] Lint passes
+- [x] Setup ESLint
+- [x] Setup Prettier
+- [x] Lint passes
 
 #### Testing
-- [ ] Install Vitest
-- [ ] Install React Testing Library
-- [ ] Configure vitest (jsdom)
-- [ ] Add test setup file
-- [ ] `pnpm test` runs successfully
+- [x] Install Vitest
+- [x] Install React Testing Library
+- [x] Configure vitest (jsdom)
+- [x] Add test setup file
+- [x] `pnpm test` runs successfully
 
 #### Base Structure
-- [ ] Create folders:
+- [x] Create folders:
   - src/app
   - src/components/ui
   - src/features
   - src/lib
   - src/styles
-- [ ] Add `cn()` helper (clsx + tailwind-merge)
+- [x] Add `cn()` helper (clsx + tailwind-merge)
 
 #### UI Base
-- [ ] Button component
-- [ ] Card component
+- [x] Button component
+- [x] Card component
 
 #### Docs
-- [ ] Create README.md
-- [ ] Add local run instructions
+- [x] Create README.md
+- [x] Add local run instructions
 
 ---
 
@@ -69,34 +70,34 @@ Auth + DB ใช้งานได้
 
 ### Checklist
 #### Prisma
-- [ ] Install Prisma
-- [ ] Configure SQLite
-- [ ] Define models:
-  - [ ] User
-  - [ ] Group
-  - [ ] GroupMember (ADMIN / MEMBER)
-  - [ ] GroupFollow
-  - [ ] Event
-  - [ ] EventParticipant (JOINED / CANCELLED)
-- [ ] `prisma migrate dev`
+- [x] Install Prisma
+- [x] Configure SQLite
+- [x] Define models:
+  - [x] User
+  - [x] Group
+  - [x] GroupMember (ADMIN / MEMBER)
+  - [x] GroupFollow
+  - [x] Event
+  - [x] EventParticipant (JOINED / CANCELLED)
+- [x] `prisma migrate dev`
 
 #### Seed
-- [ ] Seed script created
-- [ ] Seed data:
-  - [ ] Users
-  - [ ] Groups
-  - [ ] Group members
-  - [ ] Upcoming events
+- [x] Seed script created
+- [x] Seed data:
+  - [x] Users
+  - [x] Groups
+  - [x] Group members
+  - [x] Upcoming events
 
 #### Auth
-- [ ] Setup Auth.js / NextAuth (App Router)
-- [ ] Google provider (env placeholder)
-- [ ] LINE provider (env placeholder)
-- [ ] Session handling
-- [ ] Helper: getCurrentUser()
+- [x] Setup Auth.js / NextAuth (App Router)
+- [x] Google provider (env placeholder)
+- [x] LINE provider (env placeholder)
+- [x] Session handling
+- [x] Helper: getCurrentUser()
 
 #### Docs
-- [ ] Update README with env + prisma commands
+- [x] Update README with env + prisma commands
 
 ---
 
@@ -107,33 +108,33 @@ Public browsing + follow groups
 
 ### Checklist
 #### Server Actions
-- [ ] createGroup (auth required)
-- [ ] followGroup
-- [ ] unfollowGroup
+- [x] createGroup (auth required)
+- [x] followGroup
+- [x] unfollowGroup
 
 #### Event Feed
-- [ ] Home page `/`
-- [ ] Filter upcoming events (endAt >= now)
-- [ ] Sort by startAt asc
-- [ ] Render seeded events
+- [x] Home page `/`
+- [x] Filter upcoming events (endAt >= now)
+- [x] Sort by startAt asc
+- [x] Render seeded events
 
 #### Group Page
-- [ ] Route `/groups/[groupId]`
-- [ ] Group info display
-- [ ] Upcoming events list
-- [ ] Follow / Unfollow button
+- [x] Route `/groups/[groupId]`
+- [x] Group info display
+- [x] Upcoming events list
+- [x] Follow / Unfollow button
 
 #### UI
-- [ ] EventCard
+- [x] EventCard
   - title
   - date/time
   - location
   - estimated cost per person
-- [ ] GroupHeader
+- [x] GroupHeader
 
 #### Architecture
-- [ ] Server Components default
-- [ ] Client Components only where needed
+- [x] Server Components default
+- [x] Client Components only where needed
 
 ---
 
@@ -144,49 +145,49 @@ Admin สร้าง event ได้ด้วย UX คนไทย
 
 ### Checklist
 #### Server Action
-- [ ] createEvent
-- [ ] Admin authorization enforced
+- [x] createEvent
+- [x] Admin authorization enforced
 
 #### Event Form — Basic Info
-- [ ] title
-- [ ] date
-- [ ] startTime
-- [ ] endTime
-- [ ] locationText
-- [ ] Google Map URL (optional)
+- [x] title
+- [x] date
+- [x] startTime
+- [x] endTime
+- [x] locationText
+- [x] Google Map URL (optional)
 
 #### Event Form — Costs
-- [ ] courtCost
-- [ ] shuttleCost
-- [ ] otherCost
-- [ ] Auto-calculated cost per person
+- [x] courtCost
+- [x] shuttleCost
+- [x] otherCost
+- [x] Auto-calculated cost per person
 
 #### Event Form — Participants
-- [ ] maxParticipants
-- [ ] allowOverbook toggle
-- [ ] skillLevels multi-select:
+- [x] maxParticipants
+- [x] allowOverbook toggle
+- [x] skillLevels multi-select:
   - BEGINNER
   - INTERMEDIATE
   - ADVANCED
   - COMPETITIVE
-- [ ] notes
+- [x] notes
 
 #### Event Form — Images
-- [ ] imageUrls (max 5)
+- [x] imageUrls (max 5)
 
 #### Preview
-- [ ] Live preview card
+- [x] Live preview card
 
 #### Validation (Zod)
-- [ ] endTime > startTime
-- [ ] costs >= 0
-- [ ] maxParticipants >= 2
-- [ ] at least 1 skill level
-- [ ] max 5 images
+- [x] endTime > startTime
+- [x] costs >= 0
+- [x] maxParticipants >= 2
+- [x] at least 1 skill level
+- [x] max 5 images
 
 #### Page
-- [ ] Route `/groups/[groupId]/events/new`
-- [ ] Redirect after success
+- [x] Route `/groups/[groupId]/events/new`
+- [x] Redirect after success
 
 ---
 
