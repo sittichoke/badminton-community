@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    command: pnpm dev --hostname 0.0.0.0 --port 3000
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      # Ensures SQLite file lives in the project root for persistence on the bind mount
+      DATABASE_URL: ${DATABASE_URL:-file:./dev.db}
+    volumes:
+      - ./:/app
+      - pnpm-store:/usr/local/share/pnpm/store
+      - node-modules:/app/node_modules
+    restart: unless-stopped
+
+volumes:
+  pnpm-store:
+  node-modules:

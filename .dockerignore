@@ -1,0 +1,10 @@
+.next
+node_modules
+.pnpm-store
+.node22
+.git
+.env
+node-v22.12.0-win-x64.zip
+*.log
+Dockerfile
+docker-compose.yml

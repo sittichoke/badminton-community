@@ -30,8 +30,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env files (example is tracked)
+.env
+.env.*
+!.env.example
 
 # vercel
 .vercel
@@ -41,6 +43,13 @@ yarn-error.log*
 next-env.d.ts
 
 # local db/runtime artifacts
+dev.db
+dev.db-journal
 prisma/dev.db
 prisma/dev.db-journal
+prisma/migrations/migration_lock.toml
 .node22/
+.pnpm-store/
+node-v22.12.0-win-x64.zip
+.vscode/*
+badminton-community.code-workspace
