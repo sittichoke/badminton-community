@@ -1,8 +1,10 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type NextAuthOptions, getServerSession } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import LineProvider from "next-auth/providers/line";
 import { prisma } from "./prisma";
+import { verifyPassword } from "./password";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -11,6 +13,23 @@ export const authOptions: NextAuthOptions = {
     strategy: "database",
   },
   providers: [
+    CredentialsProvider({
+      name: "Email",
+      credentials: {
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const email = credentials?.email?.toLowerCase();
+        const password = credentials?.password;
+        if (!email || !password) return null;
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user?.hashedPassword) return null;
+        const isValid = await verifyPassword(password, user.hashedPassword);
+        if (!isValid) return null;
+        return { id: user.id, email: user.email ?? undefined, name: user.name ?? undefined };
+      },
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",

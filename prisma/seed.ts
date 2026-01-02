@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { addDays, setHours, setMinutes } from "date-fns";
+import { hashPassword } from "../src/lib/password";
 
 const prisma = new PrismaClient();
 
@@ -11,14 +12,16 @@ async function main() {
   await prisma.group.deleteMany();
   await prisma.user.deleteMany();
 
+  const password = await hashPassword("password123");
+
   const alice = await prisma.user.create({
-    data: { name: "โค้ชแนน", email: "alice@example.com" },
+    data: { name: "โค้ชแนน", email: "alice@example.com", hashedPassword: password },
   });
   const bob = await prisma.user.create({
-    data: { name: "ต้อม", email: "bob@example.com" },
+    data: { name: "ต้อม", email: "bob@example.com", hashedPassword: password },
   });
   const charlie = await prisma.user.create({
-    data: { name: "มด", email: "charlie@example.com" },
+    data: { name: "มด", email: "charlie@example.com", hashedPassword: password },
   });
 
   const groupA = await prisma.group.create({

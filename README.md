@@ -39,6 +39,11 @@ pnpm dev
 pnpm test
 ```
 
+### Auth options
+- Email/password signup + signin at `/auth/signup` and `/auth/signin` (password min 8 chars).
+- Social: Google, LINE (provide client IDs/secrets).
+- Seeded demo logins after `pnpm db:seed`: `alice@example.com`, `bob@example.com`, `charlie@example.com` (password: `password123`).
+
 ### Docker (dev)
 ```
 cp .env.example .env

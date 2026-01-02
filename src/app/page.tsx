@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const user = await getCurrentUser();
   const upcoming = await getUpcomingEvents();
@@ -23,7 +23,8 @@ export default async function Home({
       })
     ).map((f) => f.groupId);
 
-  const onlyFollowing = searchParams?.followed === "1";
+  const params = searchParams ? await searchParams : undefined;
+  const onlyFollowing = params?.followed === "1";
   const filteredUpcoming =
     onlyFollowing && followedIds
       ? upcoming.filter((e) => followedIds.includes(e.groupId))
